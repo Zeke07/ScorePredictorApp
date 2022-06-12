@@ -5,7 +5,7 @@
  */
 package com.example.scorepredictorapp;
 
-import java.util.*;
+import java.util.List;
 
 /**
  * Simple regression model, extrapolated from parsed dataset
@@ -28,6 +28,8 @@ public class RegressionModel {
      * Summation of(x - meanofX) * Summationof(y - mean of y)/ (Summation of(x - mean ofX))^2
      * Y = mx + b, find remaining vars
      *
+     * Model is done by hand, naively, following the above procedure
+     *
      * @param list the GPA/SAT score pairs from the data
      *
      */
@@ -41,6 +43,16 @@ public class RegressionModel {
         this.slope = summationCalc/denominator;
         this.yIntercept = yMean-(xMean*this.slope);
     }
+
+    /**
+     * The output of the final program
+     * Calculates the expected SAT score (y-axis on the regression line)
+     * based on a given 'x' and other variables known
+     *
+     * @param list the dataset
+     * @param gpaGiven user input from the FX display
+     * @return
+     */
     public double predictScore(List<Score> list, double gpaGiven)
     {
       return (slope*gpaGiven) + yIntercept;
